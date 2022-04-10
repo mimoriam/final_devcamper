@@ -10,9 +10,15 @@ const {
     deleteCourse
 } = require('../controllers/course_controller')
 
+const Course = require('../models/CourseModel');
+const advancedResults = require('../middleware_utils/advancedResult');
+
 
 router.route('/')
-    .get(getCourses)
+    .get(advancedResults(Course, {
+        path: 'bootcamp',
+        select: 'name description'
+    }), getCourses)
     .post(createCourse)
 
 router.route('/:id')
