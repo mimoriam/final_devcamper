@@ -1,10 +1,16 @@
 const createError = require('http-errors');
 const express = require('express');
+const dotenv = require('dotenv')
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+// Load env vars:
+dotenv.config({ path: './config/config.env' })
+
+// Routers:
 const indexRouter = require('./routes/index');
+const bootcampRouter = require('./routes/bootcamps');
 
 const app = express();
 
@@ -19,6 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/api/v1/bootcamps', bootcampRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
