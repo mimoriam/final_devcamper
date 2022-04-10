@@ -5,6 +5,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const connectToDB = require("./config/db");
+const fileUpload = require('express-fileupload');
 
 // Load env vars:
 dotenv.config({ path: './config/config.env' })
@@ -29,6 +30,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// File upload:
+app.use(fileUpload());
+
+// Define routes here:
 app.use('/', indexRouter);
 app.use('/api/v1/bootcamps', bootcampRouter);
 app.use('/api/v1/courses', courseRouter);
