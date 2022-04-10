@@ -4,9 +4,13 @@ const dotenv = require('dotenv')
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const connectToDB = require("./config/db");
 
 // Load env vars:
 dotenv.config({ path: './config/config.env' })
+
+// Connect to DB:
+connectToDB().then();
 
 // Routers:
 const indexRouter = require('./routes/index');
