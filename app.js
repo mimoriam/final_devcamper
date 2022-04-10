@@ -15,6 +15,7 @@ connectToDB().then();
 // Routers:
 const indexRouter = require('./routes/index');
 const bootcampRouter = require('./routes/bootcamps');
+const courseRouter = require('./routes/courses');
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/v1/bootcamps', bootcampRouter);
+app.use('/api/v1/courses', courseRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
