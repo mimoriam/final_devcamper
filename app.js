@@ -17,6 +17,7 @@ connectToDB().then();
 const indexRouter = require('./routes/index');
 const bootcampRouter = require('./routes/bootcamps');
 const courseRouter = require('./routes/courses');
+const authRouter = require('./routes/auth');
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use(fileUpload());
 app.use('/', indexRouter);
 app.use('/api/v1/bootcamps', bootcampRouter);
 app.use('/api/v1/courses', courseRouter);
+app.use('/api/v1/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
