@@ -12,18 +12,18 @@ const {
 
 const Course = require('../models/CourseModel');
 const advancedResults = require('../middleware_utils/advancedResult');
-
+const { protect, authorize } = require('../middleware_utils/auth');
 
 router.route('/')
     .get(advancedResults(Course, {
         path: 'bootcamp',
         select: 'name description'
     }), getCourses)
-    .post(createCourse)
+    .post(protect, authorize('publisher', 'admin'), createCourse)
 
 router.route('/:id')
     .get(getSingleCourse)
-    .put(updateCourse)
-    .delete(deleteCourse)
+    .put(protect, authorize('publisher', 'admin'), updateCourse)
+    .delete(protect, authorize('publisher', 'admin'), deleteCourse)
 
 module.exports = router;
